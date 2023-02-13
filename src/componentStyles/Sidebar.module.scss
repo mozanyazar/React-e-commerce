@@ -1,0 +1,22 @@
+@import "../index.scss";
+
+.sidebarOverlay {
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.6);
+  top: 0;
+  right: -100%;
+  transition: all 0.3s ease;
+  &.active {
+    right: 0;
+  }
+  .sidebarContent {
+    width: 50%;
+    height: 100%;
+    background: $light-green;
+    right: 0;
+    position: absolute;
+    opacity: 1;
+  }
+}
