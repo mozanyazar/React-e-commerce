@@ -1,14 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Londrina+Shadow&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Marck+Script&display=swap");
 $primary-font: "JetBrains Mono", monospace;
 $secondary-font: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
   "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 $tertiary-font: "Londrina Shadow", cursive;
+$font-italic: "Marck Script", cursive;
 $light-purple1: #f2ecff;
 $light-pink: #ffecec;
 $light-pink1: #ffecf6;
 $light-green: #ecfffa;
 $light-yellow: #fffdec;
+
 button {
   background: transparent;
   border: none;
@@ -24,5 +27,7 @@ button {
 
 body {
   font-family: $primary-font;
-  height: 120vh;
+}
+a {
+  color: inherit;
 }

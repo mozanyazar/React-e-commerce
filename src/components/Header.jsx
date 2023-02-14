@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styles from "../componentStyles/Header.module.scss";
 import { Icon } from "@iconify/react";
@@ -7,9 +7,29 @@ import { MainStore } from "../store/MainContext";
 export const Header = () => {
   const { sidebarToggleHandler, basket } = MainStore();
   const [toggle, setToggle] = useState(false);
+  const [scrollTop, setScrollTop] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = (event) => {
+      setScrollTop(window.scrollY);
+      console.log(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
-    <header className={styles.headerWrapper}>
+    <header
+      className={
+        scrollTop <= 5
+          ? styles.headerWrapper
+          : `${styles.headerWrapper} ${styles.active}`
+      }
+    >
       <button
         onClick={() => setToggle(!toggle)}
         className={
