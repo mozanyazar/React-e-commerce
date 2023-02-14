@@ -1,11 +1,12 @@
 import React, { useState, lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
-import Footer from "./components/Footer";
-import { Header } from "./components/Header";
-import Sidebar from "./components/Sidebar";
+import Sidebar from "./components/Sidebar/Sidebar";
+import Footer from "./components/Footer/Footer";
+import Header from "./components/Header/Header";
 
 function App() {
   const Home = React.lazy(() => import("./pages/Home"));
+  const Login = React.lazy(() => import("./pages/Login"));
 
   return (
     <>
@@ -17,6 +18,14 @@ function App() {
           element={
             <Suspense fallback={<h1>loading...</h1>}>
               <Home />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <Suspense fallback={<h1>loading ...</h1>}>
+              <Login />
             </Suspense>
           }
         />

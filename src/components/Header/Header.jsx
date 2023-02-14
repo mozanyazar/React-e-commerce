@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import styles from "../componentStyles/Header.module.scss";
+import styles from "./Header.module.scss";
 import { Icon } from "@iconify/react";
-import { MainStore } from "../store/MainContext";
+import { MainStore } from "../../store/MainContext";
 
-export const Header = () => {
+const Header = () => {
   const { sidebarToggleHandler, basket } = MainStore();
   const [toggle, setToggle] = useState(false);
   const [scrollTop, setScrollTop] = useState(0);
@@ -12,7 +12,6 @@ export const Header = () => {
   useEffect(() => {
     const handleScroll = (event) => {
       setScrollTop(window.scrollY);
-      console.log(window.scrollY);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -53,7 +52,7 @@ export const Header = () => {
             <Link to={"/"}>Products</Link>
           </li>
           <li>
-            <Link to={"/"}>Log In</Link>
+            <Link to={"/login"}>Log In</Link>
           </li>
           <li>
             <Link to={"/"}>About Us</Link>
@@ -86,3 +85,5 @@ export const Header = () => {
     </header>
   );
 };
+
+export default Header;

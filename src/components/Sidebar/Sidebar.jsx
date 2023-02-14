@@ -1,6 +1,7 @@
 import React from "react";
-import styles from "../componentStyles/Sidebar.module.scss";
-import { MainStore } from "../store/MainContext";
+import styles from "./Sidebar.module.scss";
+import { MainStore } from "../../store/MainContext";
+
 const Sidebar = () => {
   const { sidebarToggleHandler, sidebarToggle } = MainStore();
   return (

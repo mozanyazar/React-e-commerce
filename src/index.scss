@@ -24,7 +24,12 @@ button {
   list-style: none;
   list-style-type: none;
 }
-
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  height: 100%;
+}
 body {
   font-family: $primary-font;
 }
