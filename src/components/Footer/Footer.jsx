@@ -3,7 +3,7 @@ import styles from "./Footer.module.scss";
 import { BsLinkedin } from "react-icons/bs";
 import { ImGithub } from "react-icons/im";
 
-import img1 from "../../assets/1.png";
+import img1 from "../../assets/avatar.png";
 
 const Footer = () => {
   return (

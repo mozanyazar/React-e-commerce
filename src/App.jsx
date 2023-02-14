@@ -5,7 +5,7 @@ import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 
 function App() {
-  const Home = React.lazy(() => import("./pages/Home"));
+  const Home = React.lazy(() => import("./pages/Home/Home"));
   const Login = React.lazy(() => import("./pages/Login"));
 
   return (
