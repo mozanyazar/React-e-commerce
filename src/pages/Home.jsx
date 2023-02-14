@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import styles from "./pagesStyles/Home.module.scss";
+import styles from "../pagesStyles/Home.module.scss";
 import { Icon } from "@iconify/react";
 import img1 from "../assets/1.png";
 import img3 from "../assets/3.png";
