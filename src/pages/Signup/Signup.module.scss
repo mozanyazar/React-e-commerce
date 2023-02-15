@@ -1,0 +1,133 @@
+@import "../../index.scss";
+.passwordConfirm {
+  font-size: 14px;
+  color: red;
+}
+.socialMedia {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  button {
+    width: clamp(330px, 56vw, 562px);
+    border-radius: 50px;
+    font-size: clamp(18px, 2.7vw, 28px);
+    height: clamp(65px, 9.6vw, 96px);
+    font-family: $primary-font;
+    display: flex;
+    align-items: center;
+    color: white;
+    justify-content: space-around;
+    svg {
+      font-size: clamp(45px, 6vw, 60px);
+    }
+    &:first-child {
+      background: #2e43ff;
+    }
+    &:last-child {
+      color: #f24e1e;
+      background: #ededed;
+    }
+  }
+}
+
+.signupWrapper {
+  background: $light-yellow;
+  padding-top: clamp(24px, 5vw, 50px);
+  padding-bottom: 60px;
+  .signupInner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    max-width: 1262px;
+    margin: 0 auto;
+    width: 98%;
+    gap: clamp(25px, 5vw, 50px);
+    .signupTitle {
+      font-size: clamp(34px, 5.5vw, 55px);
+      font-weight: 700;
+    }
+    .formInner {
+      display: flex;
+      flex-wrap: wrap;
+      row-gap: 50px;
+      column-gap: 25px;
+      align-items: center;
+      justify-content: center;
+      max-width: 900px;
+    }
+    .signupForm {
+      width: 100%;
+      height: max-content;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(45px, 6vw, 60px);
+      justify-content: center;
+      background: #ffffec;
+      border: 1px solid #000000;
+      box-shadow: 4px 6px 0px #000000;
+      .inputGroup {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        align-items: flex-start;
+        .error {
+          border: 1px solid red;
+        }
+        label {
+          font-size: clamp(18px, 2.4vw, 25px);
+          line-height: 1;
+          font-weight: 400;
+          font-family: $primary-font;
+          font-weight: 400;
+        }
+        input {
+          background: rgba(96, 94, 94, 0.18);
+          border-radius: 35px;
+          padding: 15px;
+          height: clamp(45px, 6.4vw, 64px);
+          padding-left: 42px;
+          width: clamp(400px, 40vw, 400px);
+          border: none;
+          font-size: clamp(15px, 2.5vw, 25px);
+        }
+      }
+      .signupButton {
+        width: clamp(120px, 22vw, 228px);
+        height: clamp(55px, 8.4vw, 84px);
+        font-size: clamp(22px, 3vw, 30px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #000000;
+        box-shadow: 4px 8px 0px #000000;
+        font-family: $primary-font;
+      }
+    }
+    .link {
+      font-family: $primary-font;
+      font-size: clamp(15px, 2.4vw, 25px);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 12px;
+      margin-bottom: 12px;
+      b {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+@media screen and (max-width: 500px) {
+  .signupInner .inputGroup input {
+    width: 100% !important
+      ;
+  }
+  .inputGroup {
+    width: 95% !important;
+    margin: 0 auto !important;
+  }
+}
