@@ -5,8 +5,7 @@ const MainContext = createContext();
 export const MainContextProvider = ({ children }) => {
   const [basket, setBasket] = useState([]);
   const [sidebarToggle, setSidebarToggle] = useState(false);
-  
-  
+
   //  sidebar open and close function, the key coming from Header and Sidebar component
   const sidebarToggleHandler = (key) => {
     if (key == "open") {

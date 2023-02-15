@@ -3,8 +3,11 @@ import { Link } from "react-router-dom";
 import styles from "./Header.module.scss";
 import { Icon } from "@iconify/react";
 import { MainStore } from "../../store/MainContext";
+import { auth } from "../../firebase";
+import { AuthStore } from "../../store/Auth";
 
 const Header = () => {
+  const { user, logOut } = AuthStore();
   const { sidebarToggleHandler, basket } = MainStore();
   const [toggle, setToggle] = useState(false);
   const [scrollTop, setScrollTop] = useState(0);
@@ -51,9 +54,11 @@ const Header = () => {
           <li>
             <Link to={"/"}>Products</Link>
           </li>
-          <li>
-            <Link to={"/login"}>Log In</Link>
-          </li>
+          {!user && (
+            <li>
+              <Link to={"/login"}>Log In</Link>
+            </li>
+          )}
           <li>
             <Link to={"/"}>About Us</Link>
           </li>
@@ -68,11 +73,19 @@ const Header = () => {
           />
         </div>
         <div className={styles.iconsGroup}>
-          <Icon
-            className={styles.personIcon}
-            fontSize={50}
-            icon="material-symbols:person"
-          />
+          {user && (
+            <div className={styles.personIconsWrapper}>
+              <Icon
+                className={styles.personIcon}
+                fontSize={50}
+                icon="material-symbols:person"
+              />
+              <div>
+                <button>My Profile</button>
+                <button onClick={() => logOut()}>Sign Out !</button>
+              </div>
+            </div>
+          )}
           <button
             onClick={() => sidebarToggleHandler("open")}
             className={styles.basketItem}
