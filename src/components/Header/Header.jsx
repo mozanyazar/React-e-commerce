@@ -7,8 +7,8 @@ import { auth } from "../../firebase";
 import { AuthStore } from "../../store/Auth";
 
 const Header = () => {
-  const { user, logOut } = AuthStore();
-  const { sidebarToggleHandler, basket } = MainStore();
+  const { user, logOut, basket } = AuthStore();
+  const { sidebarToggleHandler } = MainStore();
   const [toggle, setToggle] = useState(false);
   const [scrollTop, setScrollTop] = useState(0);
 
@@ -16,9 +16,7 @@ const Header = () => {
     const handleScroll = (event) => {
       setScrollTop(window.scrollY);
     };
-
     window.addEventListener("scroll", handleScroll);
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
@@ -52,7 +50,7 @@ const Header = () => {
             <Link to={"/"}>Home</Link>
           </li>
           <li>
-            <Link to={"/"}>Products</Link>
+            <Link to={"/products"}>Products</Link>
           </li>
           {!user && (
             <li>

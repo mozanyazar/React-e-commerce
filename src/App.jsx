@@ -5,10 +5,12 @@ import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import Message from "./components/Message";
 import ProtectedRoute from "./components/protectedRoute/protectedRoute";
+import { ProductContextProvider } from "./store/ProductApi";
 function App() {
   const Home = React.lazy(() => import("./pages/Home/Home"));
   const Login = React.lazy(() => import("./pages/Login/Login"));
   const Signup = React.lazy(() => import("./pages/Signup/Signup"));
+  const Products = React.lazy(() => import("./pages/Products/Products"));
 
   return (
     <>
@@ -41,6 +43,17 @@ function App() {
               <ProtectedRoute>
                 <Signup />
               </ProtectedRoute>
+            </Suspense>
+          }
+        />
+
+        <Route
+          path="/products"
+          element={
+            <Suspense fallback={<h1>Loading...</h1>}>
+              <ProductContextProvider>
+                <Products />
+              </ProductContextProvider>
             </Suspense>
           }
         />
