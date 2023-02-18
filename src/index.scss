@@ -39,3 +39,16 @@ body {
 a {
   color: inherit;
 }
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.flex button {
+  width: 200px;
+  height: 60px;
+  background: #efefef;
+  color: red;
+  box-shadow: 3px 3px 2px #3333;
+}
