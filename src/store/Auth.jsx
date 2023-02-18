@@ -11,22 +11,28 @@ import {
 } from "firebase/auth";
 import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 import { createContext, useContext, useEffect, useState } from "react";
+import useLocalStorageState from "use-local-storage-state";
 import { auth, db } from "../firebase";
 const Auth = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useLocalStorageState("user", { defaultValue: null });
   const [message, setMessage] = useState({
     isSucces: false,
     message: undefined,
   });
 
+  const [basket, setBasket] = useState([]);
+  const [wishList, setWishList] = useState([]);
+
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser(user);
+    onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        setUser(currentUser);
       } else {
         setUser(null);
+        setWishList([]);
+        setBasket([]);
       }
     });
   }, []);
@@ -89,6 +95,7 @@ export const AuthProvider = ({ children }) => {
           isSucces: true,
           message: "Successful",
         });
+        createCollections(result);
       })
       .catch((error) => {
         console.log(error.code);
@@ -103,6 +110,7 @@ export const AuthProvider = ({ children }) => {
           isSucces: true,
           message: "Successful",
         });
+        createCollections(result);
       })
       .catch((error) => {
         setMessage({
@@ -141,6 +149,10 @@ export const AuthProvider = ({ children }) => {
     user,
     signInFn,
     logOut,
+    wishList,
+    setWishList,
+    basket,
+    setBasket,
   };
 
   return <Auth.Provider value={{ ...values }}>{children}</Auth.Provider>;
