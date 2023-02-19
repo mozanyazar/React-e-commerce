@@ -1,25 +1,47 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { TbJewishStar } from "react-icons/tb";
-
-import styles from "./Product.module.scss";
+import { BsBookmarkXFill, BsBookmarkCheckFill } from "react-icons/bs";
 import { AuthStore } from "../../store/Auth";
 import { MainStore } from "../../store/MainContext";
+import styles from "./Product.module.scss";
+
 const ProductCard = ({ items }) => {
-  const { user, wishList, basket } = AuthStore();
-  const {} = MainStore();
+  const { user, wishList } = AuthStore();
+  const { addToWishList, removeToWishList, modalHandler } = MainStore();
+  const [wishlistExist, setWishlistExist] = useState(true);
 
-  // useEffect(() => {
-  //   if(user && wishList.length > 0){
-
-  //   }
-  // }, []);
+  useEffect(() => {
+    const findItemtoWishList = wishList.find((e) => e.id === items.id);
+    if (findItemtoWishList !== undefined) return setWishlistExist(false);
+    return setWishlistExist(true);
+  }, [wishList]);
 
   return (
-    <Link className={styles.singleCard}>
-      <button className={styles.favIcon}>
-        <TbJewishStar />
-      </button>
+    <Link
+      onClick={(e) => {
+        e.preventDefault();
+        modalHandler(items);
+      }}
+      className={styles.singleCard}
+    >
+      {wishlistExist ? (
+        <button
+          disabled={!user}
+          onClick={() => addToWishList(items)}
+          className={styles.favIcon}
+        >
+          <BsBookmarkXFill />
+        </button>
+      ) : (
+        <button
+          onClick={() => removeToWishList(items)}
+          disabled={!user}
+          className={styles.favIcon}
+        >
+          <BsBookmarkCheckFill color="orange" />
+        </button>
+      )}
+
       <img src={items.image} alt={items.title} />
       <p className={styles.cardTitle}>{items.title}</p>
       <p className={styles.cardPrice}>${items.price}</p>
