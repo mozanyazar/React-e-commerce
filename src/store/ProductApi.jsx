@@ -47,14 +47,15 @@ export const ProductContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    for (let i = 0; i < sideCategory.length; i++) {
-      if (sideCategory[i].isClicked == true) {
+    sideCategory.forEach((element) => {
+      if (element.isClicked == true) {
         setLoading(false);
-        if (sideCategory[i].menu === "all") break;
-        getSpecificCategory(sideCategory[i].menu);
+        if (element.menu == "all") {
+          return getAllCategories();
+        }
+        return getSpecificCategory(element.menu);
       }
-    }
-    getAllCategories();
+    });
   }, [sideCategory, price]);
 
   // category Update
