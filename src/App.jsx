@@ -6,6 +6,7 @@ import Header from "./components/Header/Header";
 import Message from "./components/Message";
 import ProtectedRoute from "./components/protectedRoute/protectedRoute";
 import { ProductContextProvider } from "./store/ProductApi";
+import Modal from "./components/modal/Modal";
 function App() {
   const Home = React.lazy(() => import("./pages/Home/Home"));
   const Login = React.lazy(() => import("./pages/Login/Login"));
@@ -14,6 +15,7 @@ function App() {
 
   return (
     <>
+      <Modal />
       <Message />
       <Header />
       <Sidebar />
