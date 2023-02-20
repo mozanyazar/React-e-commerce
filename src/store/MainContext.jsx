@@ -98,6 +98,7 @@ export const MainContextProvider = ({ children }) => {
   // remove item from basket
   const removeBasket = async (item) => {
     const removeFromBasket = doc(db, "basket", user.uid);
+
     // if product quantity is 1 delete the product on the basket
     if (item.quantity === 1) {
       let filter = basket.filter((product) => product.id !== item.id);
@@ -107,15 +108,16 @@ export const MainContextProvider = ({ children }) => {
           ...item,
         }),
       });
-    } else if (item.quantity > 1) {
-      let decrement = (item.quantity -= 1);
-      let filter = basket.filter((product) => product.id !== item.id);
-      setBasket(filter);
-      const obj = {
-        ...item,
-        quantity: decrement,
-      };
-      await setBasket((prev) => [...prev, obj]);
+    }
+    //find the item and quantity -1
+    else if (item.quantity > 1) {
+      let obj = [...basket];
+      for (let i = 0; i < obj.length; i++) {
+        if (obj[i].id === item.id) {
+          obj[i].quantity -= 1;
+        }
+      }
+      await setBasket(obj);
       await setDoc(removeFromBasket, {
         basket,
       });
@@ -139,14 +141,14 @@ export const MainContextProvider = ({ children }) => {
           }),
         });
       } else if (isExist !== undefined) {
-        let increment = isExist.quantity + 1;
-        const filter = basket.filter((e) => e.id !== item.id);
-        setBasket(filter);
-        const obj = {
-          ...item,
-          quantity: increment,
-        };
-        await setBasket((prev) => [obj, ...prev]);
+        let obj = [...basket];
+        for (let i = 0; i < obj.length; i++) {
+          if (obj[i].id === item.id) {
+            obj[i].quantity += 1;
+          }
+        }
+        console.log(obj);
+        await setBasket(obj);
         await setDoc(addToBasket, {
           basket,
         });
