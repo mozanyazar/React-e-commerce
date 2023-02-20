@@ -19,7 +19,15 @@ const MainContext = createContext();
 
 export const MainContextProvider = ({ children }) => {
   const navigate = useNavigate();
-  const { wishList, setWishList, basket, setBasket, user } = AuthStore();
+  const {
+    wishList,
+    setWishList,
+    basket,
+    setBasket,
+    user,
+    setTotalPrice,
+    totalPrice,
+  } = AuthStore();
   const [modalToggle, setModalToggle] = useState({
     isOpen: false,
     items: {},
@@ -79,20 +87,45 @@ export const MainContextProvider = ({ children }) => {
   };
   // calculate the total basket price
   useEffect(() => {
-    if (basket.length <= 0) return;
+    if (basket.length <= 0) return setTotalPrice(0);
     var total = basket.reduce(
       (total, item) => total + item.price * item.quantity,
       0
     );
-
-    console.log(total);
+    setTotalPrice(total.toFixed(2));
   }, [basket]);
+
+  // remove item from basket
+  const removeBasket = async (item) => {
+    const removeFromBasket = doc(db, "basket", user.uid);
+    // if product quantity is 1 delete the product on the basket
+    if (item.quantity === 1) {
+      let filter = basket.filter((product) => product.id !== item.id);
+      setBasket(filter);
+      await updateDoc(removeFromBasket, {
+        basket: arrayRemove({
+          ...item,
+        }),
+      });
+    } else if (item.quantity > 1) {
+      let decrement = (item.quantity -= 1);
+      let filter = basket.filter((product) => product.id !== item.id);
+      setBasket(filter);
+      const obj = {
+        ...item,
+        quantity: decrement,
+      };
+      await setBasket((prev) => [...prev, obj]);
+      await setDoc(removeFromBasket, {
+        basket,
+      });
+    }
+  };
 
   // add item to basket
   const addBasket = async (item) => {
-    const addToBasket = doc(db, "basket", user.uid);
-
     if (user) {
+      const addToBasket = doc(db, "basket", user.uid);
       let isExist = basket.find((e) => e.id == item.id);
       if (isExist === undefined) {
         const obj = {
@@ -106,7 +139,6 @@ export const MainContextProvider = ({ children }) => {
           }),
         });
       } else if (isExist !== undefined) {
-        console.log(isExist);
         let increment = isExist.quantity + 1;
         const filter = basket.filter((e) => e.id !== item.id);
         setBasket(filter);
@@ -114,7 +146,7 @@ export const MainContextProvider = ({ children }) => {
           ...item,
           quantity: increment,
         };
-        await setBasket((prev) => [...prev, obj]);
+        await setBasket((prev) => [obj, ...prev]);
         await setDoc(addToBasket, {
           basket,
         });
@@ -186,6 +218,8 @@ export const MainContextProvider = ({ children }) => {
     modalToggle,
     modalHandler,
     addBasket,
+
+    removeBasket,
   };
 
   return (

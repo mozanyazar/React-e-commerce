@@ -18,6 +18,8 @@ const Auth = createContext();
 
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
+  const [totalPrice, setTotalPrice] = useState(0);
+
   const [user, setUser] = useLocalStorageState("user", { defaultValue: null });
   const [message, setMessage] = useState({
     isSucces: false,
@@ -36,6 +38,7 @@ export const AuthProvider = ({ children }) => {
         setUser(null);
         setWishList([]);
         setBasket([]);
+        setTotalPrice(0);
       }
     });
   }, []);
@@ -179,6 +182,8 @@ export const AuthProvider = ({ children }) => {
     setWishList,
     basket,
     setBasket,
+    totalPrice,
+    setTotalPrice,
   };
 
   return <Auth.Provider value={{ ...values }}>{children}</Auth.Provider>;
