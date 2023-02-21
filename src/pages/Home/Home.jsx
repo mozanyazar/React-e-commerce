@@ -5,10 +5,11 @@ import img1 from "../../assets/1.png";
 import img3 from "../../assets/3.png";
 import img4 from "../../assets/4.png";
 import img5 from "../../assets/5.png";
-
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { MainStore } from "../../store/MainContext";
+import { async } from "@firebase/util";
 AOS.init();
 
 function Home() {
@@ -68,16 +69,32 @@ function Home() {
             Categories
           </Link>
           <div className={styles.catagoriesButtons}>
-            <Link data-aos-duration="1000" data-aos="flip-left">
+            <Link
+              to={"/search/jewelery"}
+              data-aos-duration="1000"
+              data-aos="flip-left"
+            >
               jewelery
             </Link>
-            <Link data-aos-duration="1000" data-aos="flip-right">
+            <Link
+              to={"/search/men's clothing"}
+              data-aos-duration="1000"
+              data-aos="flip-right"
+            >
               men's clothing
             </Link>
-            <Link data-aos-duration="1000" data-aos="flip-left">
+            <Link
+              to={"/search/women's clothing"}
+              data-aos-duration="1000"
+              data-aos="flip-left"
+            >
               women's clothing
             </Link>
-            <Link data-aos-duration="1000" data-aos="flip-right">
+            <Link
+              to={"/search/electronics"}
+              data-aos-duration="1000"
+              data-aos="flip-right"
+            >
               electronics
             </Link>
           </div>

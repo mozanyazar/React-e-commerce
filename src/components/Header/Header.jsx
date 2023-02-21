@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./Header.module.scss";
 import { Icon } from "@iconify/react";
 import { MainStore } from "../../store/MainContext";
@@ -8,7 +8,8 @@ import { AuthStore } from "../../store/Auth";
 
 const Header = () => {
   const { user, logOut, basket } = AuthStore();
-  const { sidebarToggleHandler } = MainStore();
+  const { sidebarToggleHandler, searchHandler, search, setSearch } =
+    MainStore();
   const [toggle, setToggle] = useState(false);
   const [scrollTop, setScrollTop] = useState(0);
 
@@ -64,7 +65,12 @@ const Header = () => {
       </nav>
       <div className={styles.headerRightWrapper}>
         <div className={styles.headerSearch}>
-          <input placeholder="search..." type="text" />
+          <input
+            onChange={(e) => setSearch(e.target.value)}
+            onKeyUp={searchHandler}
+            placeholder="search..."
+            type="text"
+          />
           <Icon
             className={styles.searchIcon}
             icon="material-symbols:search-rounded"

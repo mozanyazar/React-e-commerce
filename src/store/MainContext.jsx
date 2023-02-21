@@ -18,7 +18,6 @@ import { AuthStore } from "./Auth";
 const MainContext = createContext();
 
 export const MainContextProvider = ({ children }) => {
-  const navigate = useNavigate();
   const {
     wishList,
     setWishList,
@@ -27,7 +26,9 @@ export const MainContextProvider = ({ children }) => {
     user,
     setTotalPrice,
     totalPrice,
+    setMessage,
   } = AuthStore();
+  const navigate = useNavigate();
   const [modalToggle, setModalToggle] = useState({
     isOpen: false,
     items: {},
@@ -36,6 +37,8 @@ export const MainContextProvider = ({ children }) => {
   const [price, setPrice] = useLocalStorageState("price", {
     defaultValue: 1200,
   });
+  const [search, setSearch] = useState("");
+
   const [sideCategory, setSideCategory] = useLocalStorageState("sideCategory", {
     defaultValue: [
       {
@@ -66,7 +69,17 @@ export const MainContextProvider = ({ children }) => {
     ],
   });
   const [initialProduct, setİnitialProduct] = useState([]);
-
+  // SEARCH
+  const searchHandler = (event) => {
+    if (event.key === "Enter" && search.trim() !== "") {
+      navigate(`search/${search}`);
+    } else if (search.trim() == "") {
+      setMessage({
+        isSucces: false,
+        message: "type it !",
+      });
+    }
+  };
   // modal toggle
   const modalHandler = (singleProduct) => {
     if (typeof singleProduct == "object") {
@@ -122,6 +135,10 @@ export const MainContextProvider = ({ children }) => {
         basket,
       });
     }
+    setMessage({
+      isSucces: true,
+      message: "removed!",
+    });
   };
 
   // add item to basket
@@ -153,6 +170,10 @@ export const MainContextProvider = ({ children }) => {
           basket,
         });
       }
+      setMessage({
+        isSucces: true,
+        message: "added!",
+      });
     } else {
       document.getElementsByTagName("html")[0].style.cssText =
         "overflow-y:initial";
@@ -174,6 +195,10 @@ export const MainContextProvider = ({ children }) => {
         }),
       });
       setWishList((prev) => [...prev, items]);
+      setMessage({
+        isSucces: true,
+        message: "added!",
+      });
     } catch (error) {
       console.log(error);
     }
@@ -190,6 +215,10 @@ export const MainContextProvider = ({ children }) => {
       });
       const removeItems = wishList.filter((e) => e.id !== items.id);
       setWishList(removeItems);
+      setMessage({
+        isSucces: true,
+        message: "removed!",
+      });
     } catch (error) {
       console.log(error);
     }
@@ -220,8 +249,10 @@ export const MainContextProvider = ({ children }) => {
     modalToggle,
     modalHandler,
     addBasket,
-
     removeBasket,
+    searchHandler,
+    search,
+    setSearch,
   };
 
   return (

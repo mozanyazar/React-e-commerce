@@ -7,6 +7,7 @@ import Message from "./components/Message";
 import ProtectedRoute from "./components/protectedRoute/protectedRoute";
 import { ProductContextProvider } from "./store/ProductApi";
 import Modal from "./components/modal/Modal";
+import SearchPage from "./pages/Search/SearchPage";
 function App() {
   const Home = React.lazy(() => import("./pages/Home/Home"));
   const Login = React.lazy(() => import("./pages/Login/Login"));
@@ -59,6 +60,17 @@ function App() {
             </Suspense>
           }
         />
+
+        <Route path="search">
+          <Route
+            path=":search"
+            element={
+              <Suspense fallback={<h1>Loading... </h1>}>
+                <SearchPage />
+              </Suspense>
+            }
+          />
+        </Route>
       </Routes>
       <Footer />
     </>
