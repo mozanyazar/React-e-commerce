@@ -10,8 +10,8 @@ import { IoMdCloseCircle } from "react-icons/io";
 const Sidebar = () => {
   const { sidebarToggleHandler, sidebarToggle, addBasket, removeBasket } =
     MainStore();
-  const { basket, totalPrice, wishList } = AuthStore();
-  if (basket && basket.length >= 0) {
+  const { basket, totalPrice, user, logOut } = AuthStore();
+  if (user) {
     return (
       <section
         className={
@@ -53,12 +53,14 @@ const Sidebar = () => {
             ))}
           </div>
           <h2>Total Price: ${totalPrice}</h2>
-          <div className={styles.profile}>
-            <button>Profile</button>
-            <button>
-              Logout <CiLogout fontSize={60} />
-            </button>
-          </div>
+          {user && (
+            <div className={styles.profile}>
+              <button>Profile</button>
+              <button onClick={() => logOut()}>
+                Logout <CiLogout fontSize={60} />
+              </button>
+            </div>
+          )}
         </div>
       </section>
     );

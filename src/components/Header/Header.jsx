@@ -73,18 +73,11 @@ const Header = () => {
         <div className={styles.iconsGroup}>
           {user && (
             <div className={styles.personIconsWrapper}>
-              <Icon
-                className={styles.personIcon}
-                fontSize={50}
-                icon="material-symbols:person"
-              />
-              <div>
-                <button>My Profile</button>
-                <button onClick={() => logOut()}>Sign Out !</button>
-              </div>
+              <button onClick={() => logOut()}>Sign Out !</button>
             </div>
           )}
           <button
+            disabled={!user}
             onClick={() => sidebarToggleHandler("open")}
             className={styles.basketItem}
           >

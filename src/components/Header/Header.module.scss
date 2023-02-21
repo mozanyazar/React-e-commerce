@@ -82,27 +82,12 @@
       align-items: center;
       .personIconsWrapper {
         position: relative;
-        &:hover {
-          div {
-            display: flex !important;
-          }
-        }
-
-        div {
-          position: absolute;
-          display: none !important;
-          width: max-content;
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          left: -100%;
-          background: $light-pink1;
-          top: 40px;
-          button {
-            padding: 10px 30px;
-            border: 2px solid #3333;
-            font-family: $primary-font;
-          }
+        button {
+          padding: 10px 30px;
+          border: 2px solid #3333;
+          font-family: $primary-font;
+          font-weight: 700;
+          border-radius: 14px;
         }
       }
       .basketItem {
