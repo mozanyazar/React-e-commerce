@@ -17,13 +17,7 @@ const ProductCard = ({ items }) => {
   }, [wishList]);
 
   return (
-    <Link
-      onClick={(e) => {
-        e.preventDefault();
-        modalHandler(items);
-      }}
-      className={styles.singleCard}
-    >
+    <div className={styles.singleCard}>
       {wishlistExist ? (
         <button
           disabled={!user}
@@ -45,7 +39,16 @@ const ProductCard = ({ items }) => {
       <img src={items.image} alt={items.title} />
       <p className={styles.cardTitle}>{items.title}</p>
       <p className={styles.cardPrice}>${items.price}</p>
-    </Link>
+      <button
+        className={styles.seeMore}
+        onClick={(e) => {
+          e.preventDefault();
+          modalHandler(items);
+        }}
+      >
+        See more...
+      </button>
+    </div>
   );
 };
 

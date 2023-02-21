@@ -108,6 +108,11 @@
       align-items: center;
       justify-content: center;
       position: relative;
+      .seeMore {
+        padding: 5px 8px;
+        background: $light-purple1;
+        box-shadow: 1px 3px 1px #000;
+      }
       .favIcon {
         position: absolute;
         right: 10px;
@@ -124,7 +129,6 @@
       }
       .cardPrice {
         font-family: $font-italic;
-        margin-top: 20px;
         font-size: 20px;
       }
 
