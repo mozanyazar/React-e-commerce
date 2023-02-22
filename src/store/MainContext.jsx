@@ -33,6 +33,7 @@ export const MainContextProvider = ({ children }) => {
     isOpen: false,
     items: {},
   });
+
   const [sidebarToggle, setSidebarToggle] = useState(false);
   const [price, setPrice] = useLocalStorageState("price", {
     defaultValue: 1200,

@@ -13,6 +13,7 @@ function App() {
   const Login = React.lazy(() => import("./pages/Login/Login"));
   const Signup = React.lazy(() => import("./pages/Signup/Signup"));
   const Products = React.lazy(() => import("./pages/Products/Products"));
+  const Profile = React.lazy(() => import("./pages/Profile/Profile"));
 
   return (
     <>
@@ -60,7 +61,16 @@ function App() {
             </Suspense>
           }
         />
-
+        <Route
+          path="/profile"
+          element={
+            <Suspense fallback={<h1>Loading...</h1>}>
+              <ProductContextProvider>
+                <Profile />
+              </ProductContextProvider>
+            </Suspense>
+          }
+        />
         <Route path="search">
           <Route
             path=":search"

@@ -6,11 +6,13 @@ import { BsFillPlusCircleFill } from "react-icons/bs";
 import { MdRemoveCircle } from "react-icons/md";
 import { CiLogout } from "react-icons/ci";
 import { IoMdCloseCircle } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
   const { sidebarToggleHandler, sidebarToggle, addBasket, removeBasket } =
     MainStore();
   const { basket, totalPrice, user, logOut } = AuthStore();
+  const navigate = useNavigate();
   if (user) {
     return (
       <section
@@ -55,7 +57,14 @@ const Sidebar = () => {
           <h2>Total Price: ${totalPrice}</h2>
           {user && (
             <div className={styles.profile}>
-              <button>Profile</button>
+              <button
+                onClick={() => {
+                  navigate("/profile");
+                  sidebarToggleHandler("profile");
+                }}
+              >
+                Profile
+              </button>
               <button onClick={() => logOut()}>
                 Logout <CiLogout fontSize={60} />
               </button>
