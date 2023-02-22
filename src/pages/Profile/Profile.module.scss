@@ -25,7 +25,7 @@
       align-items: center;
       justify-content: center;
       svg {
-        font-size: 100px;
+        font-size: clamp(60px, 10vw, 100px);
         color: #000;
       }
     }
@@ -91,7 +91,7 @@
       row-gap: 50px;
       .wishCard {
         position: relative;
-        max-width: 300px;
+        width: 330px;
         background: #fff;
         box-shadow: 6px 5px 2px #000;
         height: 400px;
@@ -133,6 +133,22 @@
           top: 15px;
           font-size: 30px;
           color: #9e7e0a;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .profileWrapper {
+    .wishlistWrapper {
+      .cardWrapper {
+        width: 100%;
+        justify-content: space-around;
+        .wishCard {
+          width: 44%;
+          min-width: 330px;
+          max-width: initial;
         }
       }
     }
