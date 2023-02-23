@@ -13,6 +13,7 @@ import { async } from "@firebase/util";
 AOS.init();
 
 function Home() {
+  const navigate = useNavigate();
   return (
     <main className={styles.homeWrapper}>
       <div className={styles.homeFirstRow}>
@@ -26,7 +27,7 @@ function Home() {
               <span>Lorem Ipsum</span> dolor <br /> sit amet <br />{" "}
               consectetur...
             </h1>
-            <button>
+            <button onClick={() => navigate("/products")}>
               Shop Now
               <Icon icon="material-symbols:arrow-circle-right" />
             </button>
@@ -98,7 +99,7 @@ function Home() {
               electronics
             </Link>
           </div>
-          <button data-aos="fade-left">
+          <button onClick={() => navigate("/products")} data-aos="fade-left">
             Shop Now...
             <Icon icon="material-symbols:arrow-circle-right" />
           </button>
