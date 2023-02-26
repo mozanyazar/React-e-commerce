@@ -1,5 +1,3 @@
-import { set } from "date-fns";
-import { tr } from "date-fns/locale";
 import { createContext, useEffect, useState, useContext } from "react";
 import useLocalStorageState from "use-local-storage-state";
 import { MainStore } from "./MainContext";
