@@ -7,7 +7,10 @@ import Message from "./components/Message";
 import ProtectedRoute from "./components/protectedRoute/protectedRoute";
 import { ProductContextProvider } from "./store/ProductApi";
 import Modal from "./components/modal/Modal";
+import "react-loading-skeleton/dist/skeleton.css";
+
 import SearchPage from "./pages/Search/SearchPage";
+import { SkeletonTheme } from "react-loading-skeleton";
 function App() {
   const Home = React.lazy(() => import("./pages/Home/Home"));
   const Login = React.lazy(() => import("./pages/Login/Login"));

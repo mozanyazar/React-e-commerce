@@ -4,6 +4,7 @@ import { BsBookmarkXFill, BsBookmarkCheckFill } from "react-icons/bs";
 import { AuthStore } from "../../store/Auth";
 import { MainStore } from "../../store/MainContext";
 import styles from "./Product.module.scss";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 
 const ProductCard = ({ items }) => {
   const { user, wishList } = AuthStore();
@@ -37,6 +38,7 @@ const ProductCard = ({ items }) => {
       )}
 
       <img src={items.image} alt={items.title} />
+
       <p className={styles.cardTitle}>{items.title}</p>
       <p className={styles.cardPrice}>${items.price}</p>
       <button
