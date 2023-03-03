@@ -1,4 +1,5 @@
 # React-e-commerce website
+##  My main focus was to understand how React works, so I didn't pay too much attention to the user interface. 
 
 ### The e-commerce website I built to learn Reactjs
 
